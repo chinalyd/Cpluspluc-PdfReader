@@ -1,0 +1,10 @@
+#ifndef MULTIVIEWER_H
+#define MULTIVIEWER_H
+
+
+class MultiViewer : public AMidArea
+{
+
+};
+
+#endif // MULTIVIEWER_H
