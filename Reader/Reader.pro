@@ -34,3 +34,8 @@ HEADERS  += mainview.h \
 
 RESOURCES += \
     resource.qrc
+
+QT        += xml
+INCLUDEPATH += $$PWD/3rdparty/ubuntu/Poppler/Include
+unix: PKGCONFIG += poppler-qt5
+unix: CONFIG += c++11 link_pkgconfig
