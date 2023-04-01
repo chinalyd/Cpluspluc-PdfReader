@@ -26,11 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainview.cpp \
     multiviewer.cpp \
-    imainviewer.cpp
+    imainviewer.cpp \
+    kit.cpp \
+    pdfkit.cpp
 
 HEADERS  += mainview.h \
     multiviewer.h \
-    imainviewer.h
+    imainviewer.h \
+    readdefine.h \
+    kit.h \
+    pdfkit.h
 
 RESOURCES += \
     resource.qrc
