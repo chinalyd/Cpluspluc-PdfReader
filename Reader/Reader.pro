@@ -31,3 +31,6 @@ SOURCES += main.cpp\
 HEADERS  += mainview.h \
     multiviewer.h \
     imainviewer.h
+
+RESOURCES += \
+    resource.qrc

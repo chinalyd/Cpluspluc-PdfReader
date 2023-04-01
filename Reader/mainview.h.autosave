@@ -58,7 +58,7 @@ public:
     void CreateMenus();
     
 public slots:
-    void UpdataPageNum();
+    void UpdatePageNum();
     void GotoPage();
 
     void OpenFile();
