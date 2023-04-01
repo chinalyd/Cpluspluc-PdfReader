@@ -28,14 +28,20 @@ SOURCES += main.cpp\
     multiviewer.cpp \
     imainviewer.cpp \
     kit.cpp \
-    pdfkit.cpp
+    pdfkit.cpp \
+    ichildviewer.cpp \
+    thumbnailwidget.cpp \
+    naviviewer.cpp
 
 HEADERS  += mainview.h \
     multiviewer.h \
     imainviewer.h \
     readdefine.h \
     kit.h \
-    pdfkit.h
+    pdfkit.h \
+    ichildviewer.h \
+    thumbnailwidget.h \
+    naviviewer.h
 
 RESOURCES += \
     resource.qrc
