@@ -139,4 +139,35 @@ void NaviViewer::InitUI(){
     naVLayout->setContentsMargins(1, 1, 1, 1);
     this->setLayout(naVLayout);
 }
-
+void NaviViewer::InitTOC(){
+    QDomDocument* domdoc = m_IChildViewer->getTOC();//get content
+    if(domdoc == NULL)
+        return;
+    m_OutlineTree = new QTreeWidget();
+    m_OutlineTree->setStyleSheet("QTreeView::item:hover{background-color:rgb(0, 255, 0, 50)}"
+                                 "QTreeView::item:selected{background-color:rgb(255, 0, 0, 100)");
+    QTreeView* treeView = new QTreeView();
+    TocTreeModel* treeModel = new TocTreeModel(domdoc);
+    treeView->setModel(treeModel);
+    m_OutlindeLayout->addWidget(treeView);
+}
+void NaviViewer::InitConnect(){
+    if(m_OutlineTree)
+        connect(m_OutlineTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(outlineTreeClicked(QTreeWidgetItem*, int)));
+    
+}
+void NaviViewer::ComputerToc(QDomNode* domNode, QTreeWidgetItem* parentWigetItem){
+    QTreeWidgetItem* treeWidgetItem = NULL;
+    QString strDom;
+    for(QDomNode childNode = domNode->firstChild(); !childNode.inNull(); childNode = childNode.nextSibling()){
+        strDom = childNode.toElement().tagName();
+        treeWidgetItem = new QTreeWidgetItem(paterntWidgetItem, QDtringList(strDom));
+        ComputerToc(&childNode, treeWidgetItem);
+    }
+}
+void NaviViewer::sl_btnClicked(){
+    //pass
+}
+void NaviViewer::outLineTreeClicked(QTreeWidgetItem* item, int n){
+    //pass
+}

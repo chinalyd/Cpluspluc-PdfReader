@@ -29,7 +29,7 @@ public:
 private:
     QList<TocTreeItem*> m_childList;
     TocTreeItem* m_parentItem;
-    QString m_dexcription;
+    QString m_description;
 };
 class TocTreeModel:public QAbstractItemModel{
     Q_OBJECT
@@ -70,7 +70,7 @@ private slots:
 private:
     void InitUI();
     void InitTOC();
-    void InitConnect();
+    void InitConnect();//Initialize the signals and slots
 };
 
 #endif // NAVIVIEWER_H

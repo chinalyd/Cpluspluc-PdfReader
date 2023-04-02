@@ -31,7 +31,13 @@ SOURCES += main.cpp\
     pdfkit.cpp \
     ichildviewer.cpp \
     thumbnailwidget.cpp \
-    naviviewer.cpp
+    naviviewer.cpp \
+    viewstate.cpp \
+    singlecontinuousstate.cpp \
+    viewmodel.cpp \
+    docviewer.cpp \
+    docwidget.cpp \
+    childviewer.cpp
 
 HEADERS  += mainview.h \
     multiviewer.h \
@@ -41,7 +47,14 @@ HEADERS  += mainview.h \
     pdfkit.h \
     ichildviewer.h \
     thumbnailwidget.h \
-    naviviewer.h
+    naviviewer.h \
+    viewstate.h \
+    singlecontinuousstate.h \
+    viewmodel.h \
+    idocwidget.h \
+    docviewer.h \
+    docwidget.h \
+    childviewer.h
 
 RESOURCES += \
     resource.qrc
