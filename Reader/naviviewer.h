@@ -10,10 +10,10 @@
 #include<QPushButton>
 #include<QTreeWidget>
 #include<QTreeWidgetItem>
-#include<QLsit>
+#include<QList>
 
-#include"IChildViewer.h"
-#include"ThumbnailWidget.h"
+#include"ichildviewer.h"
+#include"thumbnailwidget.h"
 
 class TocTreeItem{
 public:
@@ -27,7 +27,7 @@ public:
     int row() const;
     TocTreeItem *parentItem();
 private:
-    Qlist<TocTreeItem*> m_childList;
+    QList<TocTreeItem*> m_childList;
     TocTreeItem* m_parentItem;
     QString m_dexcription;
 };
