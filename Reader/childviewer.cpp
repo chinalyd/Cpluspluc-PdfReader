@@ -1,20 +1,20 @@
 #include "childviewer.h"
 
-ChildViewer::ChildViewer(IMainViewer* iMainViewer):m_IMainViewer(iMainViewer),m_docstate(SINGLE_CONTINUOUS),m_dCurDocMultiPle(1){
+ChildViewer::ChildViewer(IMainViewer* iMainViewer):m_IMainViewer(iMainViewer),m_docstate(SINGLE_CONTINUOUS),m_dCurDocMultiple(1){
     //shut down all the window
     setAttribute(Qt::WA_DeleteOnClose);
     m_strFileName = m_IMainViewer->getFileName();
     m_splitterMain = new QSplitter(Qt::Horizontal, this);
     m_splitterMain->setHandleWidth(1);
     m_ViewModel = new ViewModel(this);
-    m_navigationBar = new DocWidget(this);
-    m_pDocWidght = new DocWidght(this);
+    m_navigationBar = new NaviViewer(this);
+    m_pDocWidget = new DocWidget(this);
     m_splitterMain->addWidget(m_navigationBar);
     m_splitterMain->addWidget(m_pDocWidget);
     m_splitterMain->setStretchFactor(1, 1);
-    m_splitterMain->setAutoFillBackGround(true);
+    m_splitterMain->setAutoFillBackground(true);
     m_splitterMain->show();
-    m_pDocWidgetScrollbar = m_pDocWidget->getScrollArea()->verticalScrollBar();
+    m_pDocWidgetScrollBar = m_pDocWidget->getScrollArea()->verticalScrollBar();
     connect(m_pDocWidgetScrollBar, SIGNAL(valueChanged(int)), this, SLOT(lineEditChange()));
 }
 void ChildViewer::RefreshWindow(){

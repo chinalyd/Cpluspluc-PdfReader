@@ -9,7 +9,7 @@ class DocWidget:public IDocWidget{
     Q_OBJECT
 public:
     DocWidget(IChildViewer* childviewer);
-    virtual ~DocWidget();
+    virtual ~DocWidget(){}
 public:
     virtual int getPageCount(){
         return m_IChildViewer->getPageCount();
@@ -17,7 +17,7 @@ public:
     virtual QSize getActruallyPageSize(int nPageNum){
         return m_IChildViewer->getActruallyPageSize(nPageNum);
     }
-    virtual QImage getactruallyPageImage(int nPageNum){
+    virtual QImage getActruallyPageImage(int nPageNum){
         return m_IChildViewer->getActruallyPageImage(nPageNum);
     }
     virtual void RenderPages(QPainter *painter){

@@ -54,7 +54,7 @@ private:
     DocState m_docstate;
     double m_dCurDocMultiple;
 public:
-    IMainViewer* m_ImainViewer;
+    IMainViewer* m_IMainViewer;
     QString m_strFileName;
     QSplitter* m_splitterMain;
     NaviViewer* m_navigationBar;

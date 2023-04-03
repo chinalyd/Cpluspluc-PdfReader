@@ -13,9 +13,7 @@ DocWidget::DocWidget(IChildViewer* childviewer):m_IChildViewer(childviewer){
     m_pScrollBar = m_pScrollArea->verticalScrollBar();
     m_pScrollArea->setAlignment(Qt::AlignCenter);
 }
-DocWidget::~DocWidget(){
 
-}
 void DocWidget::resizeEvent(QResizeEvent* e){
     _resize();
 }
