@@ -9,7 +9,7 @@ ViewModel::ViewModel(ChildViewer* ChildViewer):m_ChildViewer(ChildViewer), m_kit
     m_ViewState = new SingleContinuousState(m_ChildViewer);
 }
 ViewModel::~ViewModel(){}
-int ViewNodel::GetActruallyPageHighCount(){
+int ViewModel::GetActruallyPageHighCount(){
     int nPageHighCount = 0;
     int nPageCount = GetPageCount();
     for (int i = 0; i < nPageCount; i++){

@@ -4,14 +4,14 @@
 #include<QScrollBar>
 #include"ichildviewer.h"
 
-class ViewState;
+class ViewModel;
 class ChildViewer;
 class DocWidget;
 class ViewState
 {
 public:
     ViewState(){}
-    virtual ~VieweState(){}
+    virtual ~ViewState(){}
 public:
     virtual void RenderPages(QPainter* paint) = 0;
     virtual int GetCurPageNum() = 0;

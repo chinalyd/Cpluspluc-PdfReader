@@ -5,7 +5,7 @@ ThumbnailWidget::ThumbnailWidget(IChildViewer* childViewer):m_IChildViewer(child
     m_vBoxlayout = new QVBoxLayout(this);
     m_listView = new QListView();
     m_listView->setViewMode(QListView::IconMode);
-    m_listView->setSpacint(10);
+    m_listView->setSpacing(10);
     m_listView->setIconSize(QSize(150, 300));
     m_listView->setModelColumn(1);
     m_listView->setResizeMode(QListView::Adjust);
@@ -13,7 +13,7 @@ ThumbnailWidget::ThumbnailWidget(IChildViewer* childViewer):m_IChildViewer(child
     m_listView->setModel(m_ItemModel);
     m_vBoxlayout->addWidget(m_listView);
     m_vBoxlayout->setContentsMargins(1, 1, 1, 1);
-    m_nPageCount = n_IChildViewer->getPageCount();
+    m_nPageCount = m_IChildViewer->getPageCount();
 }
 ThumbnailWidget::~ThumbnailWidget(){
 
@@ -24,9 +24,9 @@ void ThumbnailWidget::timerEvent(QTimerEvent *){
     QImage img; //get page image
     img = m_IChildViewer->getActruallyPageImage(m_nCurThumbDrawPageNum);
     QPixmap pixmap; //create the canvas
-    pixmap = QPixmap::fromImage(img);
+    pixmap = QPixmap::fromImage(img);//page num convert to character
     QString strPageNum = QString::number(m_nCurThumbDrawPageNum + 1);
-    QStandardItem* item = new QStandarditem(QIcon(pixmap), strPageNum);
+    QStandardItem* item = new QStandardItem(QIcon(pixmap), strPageNum);
     m_ItemModel->appendRow(item);
-    m_nCurThumDrawPageNum++;
+    m_nCurThumbDrawPageNum++;
 }

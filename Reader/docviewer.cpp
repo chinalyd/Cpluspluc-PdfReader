@@ -1,6 +1,6 @@
 #include "docviewer.h"
 
-DocViewer::DocViewer(IDocWidget* DocWidget):m_IdocWidget(DocWidget)
+DocViewer::DocViewer(IDocWidget* DocWidget):m_IDocWidget(DocWidget)
 {
     //pass
 }

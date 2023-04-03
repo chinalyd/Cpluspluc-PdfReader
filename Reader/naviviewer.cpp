@@ -64,10 +64,10 @@ void TocTreeModel::parserDom(QDomNode* domNode, TocTreeItem* parentItem){
 }
 int TocTreeModel::columnCount(const QModelIndex &parent) const{
     if(parent.isValid()){
-        return static_vast<TocTreeItem*>(parent.internalPointer())->columnCount();
+        return static_cast<TocTreeItem*>(parent.internalPointer())->columnCount();
     }
     else
-        return toorItem->columnCount();
+        return rootItem->columnCount();
 }
 int TocTreeModel::rowCount(const QModelIndex &parent) const{
     TocTreeItem *parentItem;
@@ -78,11 +78,11 @@ int TocTreeModel::rowCount(const QModelIndex &parent) const{
     else
         parentItem = static_cast<TocTreeItem*>(parent.internalPointer());
 }
-QVariant TocTreeModel::data(const QModelIndex *index, int role) const{
-    if(!index->isValid())
+QVariant TocTreeModel::data(const QModelIndex &index, int role) const{
+    if(!index.isValid())
         return QVariant();
-    TocTreeitem *item = static_cast<TocTreeItem*>(index->internalPointer());
-    return QVariant(item->getDescription(index->column()));
+    TocTreeItem *item = static_cast<TocTreeItem*>(index.internalPointer());
+    return QVariant(item->getDescription(index.column()));
 }
 Qt::ItemFlags TocTreeModel::flags(const QModelIndex &index) const{
     if (!index.isValid()){
@@ -90,7 +90,7 @@ Qt::ItemFlags TocTreeModel::flags(const QModelIndex &index) const{
     }
     return QAbstractItemModel::flags(index);
 }
-QVariant TocTreeModel::heartData(int section, Qt::Orientation orientation, int role) const{
+QVariant TocTreeModel::headerData(int section, Qt::Orientation orientation, int role) const{
     return QVariant();
 }
 QModelIndex TocTreeModel::index(int row, int column, const QModelIndex &parent) const{
@@ -116,7 +116,7 @@ QModelIndex TocTreeModel::parent(const QModelIndex &index) const{
         return QModelIndex();
     return createIndex(parentItem->row(), 0, parentItem);
 }
-NaviViewer::NaviViewer(IChildViewer* childviewer):m_IChildeViewer(childviewer), m_OutlineTree(NULL){
+NaviViewer::NaviViewer(IChildViewer* childviewer):m_IChildViewer(childviewer), m_OutlineTree(NULL){
     InitUI();
     InitTOC();
     InitConnect();
@@ -128,9 +128,9 @@ void NaviViewer::InitUI(){
     m_OutlineWidget->setLayout(m_OutlineLayout);
     m_OutlineLayout->setContentsMargins(1, 1, 1, 1);
     //set label
-    m_TumnbnailWidget = new ThumnbailWidget(m_IChildViewer);
+    m_ThumbnailWidget = new ThumbnailWidget(m_IChildViewer);
     m_tabWidget = new QTabWidget();
-    m_tabWidget->setTabPosition(QtabWidget::West);
+    m_tabWidget->setTabPosition(QTabWidget::West);
     m_tabWidget->addTab(m_OutlineWidget, "Content");
     m_tabWidget->addTab(m_ThumbnailWidget, "Thumbnail");
     //vertical layout
@@ -139,4 +139,35 @@ void NaviViewer::InitUI(){
     naVLayout->setContentsMargins(1, 1, 1, 1);
     this->setLayout(naVLayout);
 }
+void NaviViewer::InitTOC(){
+    QDomDocument* domdoc = m_IChildViewer->getTOC();//get content
+    if(domdoc == NULL)
+        return;
+    m_OutlineTree = new QTreeWidget();
+    m_OutlineTree->setStyleSheet("QTreeView::item:hover{background-color:rgb(0, 255, 0, 50)}"
+                                 "QTreeView::item:selected{background-color:rgb(255, 0, 0, 100)");
+    QTreeView* treeView = new QTreeView();
+    TocTreeModel* treeModel = new TocTreeModel(domdoc);
+    treeView->setModel(treeModel);
+    m_OutlineLayout->addWidget(treeView);
+}
+void NaviViewer::InitConnect(){
+    if(m_OutlineTree)
+        connect(m_OutlineTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(outlineTreeClicked(QTreeWidgetItem*, int)));
 
+}
+void NaviViewer::ComputerToc(QDomNode* domNode, QTreeWidgetItem* parentWidgetItem){
+    QTreeWidgetItem* treeWidgetItem = NULL;
+    QString strDom;
+    for(QDomNode childNode = domNode->firstChild(); !childNode.isNull(); childNode = childNode.nextSibling()){
+        strDom = childNode.toElement().tagName();
+        treeWidgetItem = new QTreeWidgetItem(parentWidgetItem, QStringList(strDom));
+        ComputerToc(&childNode, treeWidgetItem);
+    }
+}
+void NaviViewer::sl_btnClicked(){
+    //pass
+}
+void NaviViewer::outLineTreeClicked(QTreeWidgetItem* item, int n){
+    //pass
+}

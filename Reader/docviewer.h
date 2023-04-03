@@ -6,7 +6,7 @@
 #include<QPainter>
 #include"ichildviewer.h"
 #include"viewmodel.h"
-#include'idocwidget.h"
+#include"idocwidget.h"
 
 
 class DocViewer:public QWidget

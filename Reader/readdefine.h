@@ -3,7 +3,7 @@
 
 #include<QWidget>
 #include<QSplitter>
-#include<QTabWidgt>
+#include<QTabWidget>
 #include<QLayout>
 #include<QPushButton>
 #include<QScrollArea>

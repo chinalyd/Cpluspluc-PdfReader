@@ -18,10 +18,10 @@ public:
         return m_IChildViewer->getActruallyPageSize(nPageNum);
     }
     virtual QImage getactruallyPageImage(int nPageNum){
-        return m_IChildVIewer->getActruallyPageImage(nPageNum);
+        return m_IChildViewer->getActruallyPageImage(nPageNum);
     }
     virtual void RenderPages(QPainter *painter){
-        m_IChilderViewer->RenderPages(painter);
+        m_IChildViewer->RenderPages(painter);
     }
     virtual QScrollArea* getScrollArea(){
         return m_pScrollArea;
@@ -35,7 +35,7 @@ public:
     QScrollArea* getScroll(){
         return m_pScrollArea;
     }
-    void RefreshWindoW();
+    void RefreshWindow();
 public:
     void resizeEvent(QResizeEvent* e);
 private:

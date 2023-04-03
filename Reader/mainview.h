@@ -39,8 +39,8 @@ private:
     QAction* m_SaveAction;
     QAction* m_QuitAction;
     
-    QAction* m_ZoonIn;
-    QAction* m_ZoonOut;
+    QAction* m_ZoomIn;
+    QAction* m_ZoomOut;
     QAction* m_ZoomReset;
     
     QAction* m_PreviousPage;
@@ -58,7 +58,7 @@ public:
     void CreateMenus();
     
 public slots:
-    void UpdataPageNum();
+    void UpdatePageNum();
     void GotoPage();
 
     void OpenFile();

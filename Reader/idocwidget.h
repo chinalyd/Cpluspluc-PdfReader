@@ -1,6 +1,6 @@
 #ifndef IDOCWIDGET_H
 #define IDOCWIDGET_H
-#incluede"readdefine.h"
+#include"readdefine.h"
 
 class IDocWidget:public QWidget{
     Q_OBJECT

@@ -5,7 +5,7 @@ MainView::MainView(QWidget *parent)
 {
     resize(QSize(800,600));
     statusBar();
-    CreateBar();
+    CreateActions();
     CreateMenus();
     CreateToolBar();
 
@@ -20,25 +20,25 @@ MainView::~MainView()
 {
 
 }
-void MainViewer::CreateMenus(){
-    m_FileMenu = menuBar()->addMenu(tr('File(F)'));
+void MainView::CreateMenus(){
+    m_FileMenu = menuBar()->addMenu(tr("File(F)"));
     m_FileMenu->addAction(m_OpenAction);
     m_FileMenu->addAction(m_SaveAction);
     m_FileMenu->addSeparator();
     m_FileMenu->addAction(m_QuitAction);
 
-    m_EditMenu = new QMenu('Edit(E)');
+    m_EditMenu = new QMenu("Edit(E)");
     menuBar()->addMenu(m_EditMenu);
 
-    m_WindowsMenu = menuBar()->addMenu(tr('View(V)'));
-    m_HelpMenu = menuBar()->addMenu(tr('Help(H)'));
+    m_WindowMenu = menuBar()->addMenu(tr("View(V)"));
+    m_HelpMenu = menuBar()->addMenu(tr("Help(H)"));
 
 }
 
-void MainViewer::CreateToolBar(){
+void MainView::CreateToolBar(){
     //Open tool bar
     m_FileTool = new QToolBar(this);
-    addToolBar(QT::TopBarArea, m_FileTool);
+    addToolBar(Qt::TopToolBarArea, m_FileTool);
     m_FileTool->addAction(m_OpenAction);
     m_FileTool->addAction(m_SaveAction);
     m_FileTool->addSeparator();
@@ -62,14 +62,14 @@ void MainViewer::CreateToolBar(){
     m_PageNumLineEdit->setFixedWidth(30);
     m_PageNumLineEdit->setText("0");
 
-    m_PageCountlabel->setText("  /  0");
+    m_PageCountLabel->setText("  /  0");
 
     connect(m_PageNumLineEdit, SIGNAL(textChanged()), this, SLOT(UpdatePageNum()));
     connect(m_PageNumLineEdit, SIGNAL(returnPressed()), this, SLOT(GotoPage()));
 
 }
 
-void MainViewer::CreateActions(){
+void MainView::CreateActions(){
     //Open
     m_OpenAction = new QAction(QIcon(":image/open"), "Open", this);
     m_OpenAction->setShortcut(tr("Ctrl+O"));
@@ -108,33 +108,33 @@ void MainViewer::CreateActions(){
 
 }
 
-void MainViewer::OpenFile(){
+void MainView::OpenFile(){
     QString strFilter = "*.pdf";
-    QString strDir = QStandarPaths::writableLocation(QStandardPaths::DesktopLocation);
+    QString strDir = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
     m_strFileName = QFileDialog::getOpenFileName(this, "Reader", strDir, strFilter);
     if(m_strFileName.isEmpty())
         return;
     NewFile();
     RefreshWindow();
 }
-void MainViewer::NewFile(){
+void MainView::NewFile(){
     ChildViewer *childViewer = CreateChildViewer();
-    int index = m_strFilename.lastIndexOf("/");
-    QString strFileName = m_strFileName.mid((index + 1), (m_setFileName.size() - index));
+    int index = m_strFileName.lastIndexOf("/");
+    QString strFileName = m_strFileName.mid((index + 1), (m_strFileName.size() - index));
     childViewer->setWindowTitle(strFileName);
     childViewer->show();
 }
-childViewer* MainViewer::CreateChildViewer(){
+ChildViewer* MainView::CreateChildViewer(){
     ChildViewer *child = new ChildViewer(this);
     m_MainMdiArea->addSubWindow(child);
     return child;
 }
-void MainViewer::SaveFile(){
+void MainView::SaveFile(){
 }
-void MainViewer::CloseFile(){
+void MainView::CloseFile(){
     this->close();
 }
-ChildViewer* MainViewer::getCurChildViewer(){
+ChildViewer* MainView::getCurChildViewer(){
     QMdiSubWindow* mdiSubWindow = m_MainMdiArea->currentSubWindow();
     if(mdiSubWindow == NULL){
         return NULL;
@@ -143,7 +143,7 @@ ChildViewer* MainViewer::getCurChildViewer(){
     Q_ASSERT(child != NULL);
     return child;
 }
-void MainViewer::ZoomIn(){
+void MainView::ZoomIn(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
@@ -151,33 +151,33 @@ void MainViewer::ZoomIn(){
     RefreshWindow();
 }
 
-void MainViewer::ZoomOut(){
+void MainView::ZoomOut(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
     child->ZoomOut();
     RefreshWindow();
 }
-void MainViewer::ZoomReset(){
+void MainView::ZoomReset(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
     child->ZoomReset();
     RefreshWindow();
 }
-void MainViewer::PreviousPage(){
+void MainView::PreviousPage(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
     child->PreviousPage();
 }
-void MainViewer::NextPage(){
+void MainView::NextPage(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
     child->NextPage();
 }
-void MainViewer::UpdatePageNum(){
+void MainView::UpdatePageNum(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
@@ -189,7 +189,7 @@ void MainViewer::UpdatePageNum(){
     str = " / " + str;
     m_PageCountLabel->setText(str);
 }
-void MainViewer::GotoPage(){
+void MainView::GotoPage(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;
@@ -197,7 +197,7 @@ void MainViewer::GotoPage(){
     int nPage = str.toInt() - 1;
     child->GotoPage(nPage);
 }
-void MainViewer::RefreshWindow(){
+void MainView::RefreshWindow(){
     ChildViewer* child = getCurChildViewer();
     if(child == NULL)
         return;

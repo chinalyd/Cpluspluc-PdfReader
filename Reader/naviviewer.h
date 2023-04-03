@@ -38,13 +38,13 @@ public:
     ~TocTreeModel();
     QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
     Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
-    QVatiant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-    QModelIndex index(int row, int column, const QModelIndex &parent = QmodelIndeex()) const Q_DECL_OVERRIDE;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     QModelIndex parent(const QModelIndex &index) const Q_DECL_OVERRIDE;
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 private:
-    void parserDom(QDomNode* domNode, TocTreeTem *parent);
+    void parserDom(QDomNode* domNode, TocTreeItem *parent);
     TocTreeItem *rootItem;
 };
 
@@ -53,13 +53,14 @@ class NaviViewer:public QWidget
     Q_OBJECT
 public:
     NaviViewer(IChildViewer* childvewer);
+    NaviViewer();
 private:
     IChildViewer* m_IChildViewer;
 private:
     QWidget* m_topNBWidget;
     QTabWidget* m_tabWidget;
     QWidget* m_OutlineWidget;
-    QTreeWidget* m_OutlineWidget;
+    QTreeWidget* m_OutlineTree;
     QVBoxLayout* m_OutlineLayout;
     void ComputerToc(QDomNode* domNode, QTreeWidgetItem* parentWidgetItem);
     QWidget* m_ThumbnailWidget;

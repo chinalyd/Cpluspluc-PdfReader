@@ -11,13 +11,13 @@ class DocWidget;
 class ViewModel
 {
 public:
-    ViewModel(ChilsViewer* ChildViewer);
+    ViewModel(ChildViewer* ChildViewer);
     ~ViewModel();
 public:
-    ChildViewer* m_ChildViewer;
-    Kit* m_kit;
+    ChildViewer* m_ChildViewer;//sub window
+    Kit* m_kit;//interface
 private:
-    ViewState* m_ViewState;
+    ViewState* m_ViewState;//viewdisplay
     double m_DocMultiple;
 public:
     int GetPageCount(){
@@ -26,14 +26,18 @@ public:
     QSize GetActruallyPageSize(int nPageNum){
         return m_kit->GetActruallyPageSize(nPageNum);
     }
-    QSize GetActruallyPageImage(int nPageNum){
+    QImage GetActruallyPageImage(int nPageNum){
         return m_kit->GetActruallyPageImage(nPageNum);
     }
+    QSize GetPageSize(int nPageNum){
+        return m_kit->GetPageSize(nPageNum);
+    }
+
     QImage GetPageImage(int nPageNum){
         return m_kit->GetPageImage(nPageNum);
     }
     QDomDocument* GetTOC(){
-        return m_kit->GetTOC();
+        return m_kit->GetTOC(); //Content
     }
 public:
     int GetActruallyPageHighCount();//Get page height

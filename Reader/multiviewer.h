@@ -1,8 +1,8 @@
 #ifndef MULTIVIEWER_H
 #define MULTIVIEWER_H
 
-
-class MultiViewer : public AMidArea
+#include<QMdiArea>
+class MultiViewer:public QMdiArea
 {
 public:
     MultiViewer();

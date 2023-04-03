@@ -5,6 +5,8 @@ SingleContinuousState::SingleContinuousState(IChildViewer* childViewer):m_ChildV
 {
 }
 SingleContinuousState::~SingleContinuousState(){
+}
+void SingleContinuousState::RenderPages(QPainter *paint){
     if(paint == NULL){
         return;
     }
@@ -21,7 +23,7 @@ SingleContinuousState::~SingleContinuousState(){
         GetVPos(nScrollYFlag, nPageNum, nPageVPos);
         int nRenderHeight = GetPageSize(nPageNum).height() + 8 - nPageVPos;
         imageCopy = m_ChildViewer->getPageImage(nPageNum);
-        img = imageCopy.copy(0, nPageVPos, GetPageSize(nPageNum_.width(), nRenderHeight));
+        img = imageCopy.copy(0, nPageVPos, GetPageSize(nPageNum).width(), nRenderHeight);
         QSize docWidget = m_ChildViewer->getDocWidgetSize();
         nXDrawPos = ((docWidget.width()-GetPageSize(nPageNum).width()))/2;
         if(nXDrawPos < 0)
@@ -62,7 +64,7 @@ int SingleContinuousState::GetPageHeightCount(int nNumPage){
     }
     return nHeight;
 }
-bool SingleContinuoueState::GetVPos(int nScrollPos, int &nPageNum, int &nPageVStartPos){
+bool SingleContinuousState::GetVPos(int nScrollPos, int &nPageNum, int &nPageVStartPos){
     int nPageCount = GetPageCount();
     for(int i = 0; i < nPageCount; i++){
         //scroll bar less than page height

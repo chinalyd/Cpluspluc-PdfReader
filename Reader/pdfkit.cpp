@@ -3,10 +3,6 @@ PDFkit::PDFkit():m_pdfPage(NULL), m_document(NULL){
 
 }
 
-PDFkit::PDFkit()
-{
-
-}
 PDFkit::~PDFkit(){
 
 }
@@ -27,7 +23,7 @@ QImage PDFkit::GetActruallyPageImage(int nPageNum){
     Poppler::Page* pPage = NULL;
     pPage = GetPage(nPageNum);
     QSize size = GetActruallyPageSize(nPageNum);
-    QImage imageBuffer = ppage->renderToImage(72, 72, 0, nPageNum, size.width(), size.height());
+    QImage imageBuffer = pPage->renderToImage(72, 72, 0, nPageNum, size.width(), size.height());
     return imageBuffer;
 }
 QSize PDFkit::GetActruallyPageSize(int nPageNum){
